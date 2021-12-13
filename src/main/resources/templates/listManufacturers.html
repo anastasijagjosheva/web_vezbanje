@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Manufacturer Order page - Welcome and choose a manufacturer</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to our Shop App</h1>
+</header>
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-12" th:if="${manufacturers.size() > 0}">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Manufacturer name</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Address</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="man : ${manufacturers}">
+                        <td th:text="${man.getName()}"></td>
+                        <td th:text="${man.getCountry()}"></td>
+                        <td th:text="${man.getAddress()}"></td>
+                        <td class="text-right">
+                            <form th:action="@{'/manufacturers/delete/{id}' (id=${man.getId()})}" th:method="POST">
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fa fa-trash">Delete</i>
+                                </button>
+                            </form>
+                            <form th:action="@{'/manufacturers/edit-form/{id}' (id=${man.getId()})}" th:method="GET" class="btn btn-sm btn-info">
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fa fa-trash">Edit</i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col mb-3">
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <form th:action="@{'/manufacturers/add-form'}" th:method="POST" class="btn btn-sm btn-info">
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            <i class="fa fa-trash">Add new manufacturer</i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

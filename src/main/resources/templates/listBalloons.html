@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Balloon Order page - Welcome and choose a Balloon</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to our Balloon Shop App</h1>
+</header>
+    <h2>Choose balloon color:</h2>
+    <form th:action="@{'/selectBalloon'}" th:method="POST">
+        <th:block th:each="balloon : ${balloons}">
+            <input type="radio" name="balloon" th:value="${balloon?.name}"
+                   th:text="${balloon.name} +'  -  '+ ${balloon.description} +'  -  '+ ${balloon.manufacturer}"><br/>
+
+        </th:block>
+        <br/>
+        <input type='submit' value='Submit'/>
+    </form>
+
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12" th:if="${balloons1.size() > 0}">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Balloon name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Manufacturer</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="balloon1 : ${balloons1}">
+                            <td th:text="${balloon1.getName()}"></td>
+                            <td th:text="${balloon1.getDescription()}"></td>
+                            <td th:text="${balloon1.getManufacturer() != null}
+                            ? ${balloon1.getManufacturer().getName()} : 'No Manufacturer'"></td>
+                            <td class="text-right">
+                                <form th:action="@{'/balloons/delete/{id}' (id=${balloon1.getId()})}" th:method="POST">
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-trash">Delete</i>
+                                    </button>
+                                </form>
+                                <form th:action="@{'/balloons/edit-form/{id}' (id=${balloon1.getId()})}" th:method="GET" class="btn btn-sm btn-info">
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-trash">Edit</i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col mb-3">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <form th:action="@{'/balloons/add-form'}" th:method="POST" class="btn btn-sm btn-info">
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash">Add new product</i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
