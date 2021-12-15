@@ -12,6 +12,9 @@ import mk.ukim.finki.wp.lab.repository.impl.InMemoryOrderRepository;
 import mk.ukim.finki.wp.lab.repository.impl.InMemoryShoppingCartRepository;
 import mk.ukim.finki.wp.lab.repository.impl.InMemoryUserRepository;
 
+import mk.ukim.finki.wp.lab.repository.jpa.OrderRepositoryJpa;
+import mk.ukim.finki.wp.lab.repository.jpa.ShoppingCartRepositoryJpa;
+import mk.ukim.finki.wp.lab.repository.jpa.UserRepositoryJpa;
 import mk.ukim.finki.wp.lab.service.ShoppingCartService;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -20,11 +23,11 @@ import java.util.stream.Collectors;
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
-    private final InMemoryShoppingCartRepository shoppingCartRepository;
-    private final InMemoryUserRepository userRepository;
-    private final InMemoryOrderRepository orderRepository;
+    private final ShoppingCartRepositoryJpa shoppingCartRepository;
+    private final UserRepositoryJpa userRepository;
+    private final OrderRepositoryJpa orderRepository;
 
-    public ShoppingCartServiceImpl(InMemoryShoppingCartRepository  shoppingCartRepository, InMemoryUserRepository  userRepository, InMemoryOrderRepository orderRepository) {
+    public ShoppingCartServiceImpl(ShoppingCartRepositoryJpa  shoppingCartRepository, UserRepositoryJpa  userRepository, OrderRepositoryJpa orderRepository) {
         this.shoppingCartRepository = shoppingCartRepository;
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
@@ -45,7 +48,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 .orElseThrow(() -> new UserNotFoundException(username));
 
         return this.shoppingCartRepository
-                .findByUsernameAndStatus(username, ShoppingCartStatus.CREATED)
+                .findByUserAndStatus(user, ShoppingCartStatus.CREATED)
                 .orElseGet(() -> {
                     ShoppingCart cart = new ShoppingCart(user);
                     return this.shoppingCartRepository.save(cart);

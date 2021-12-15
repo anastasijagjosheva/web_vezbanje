@@ -10,8 +10,8 @@ import javax.persistence.*;
 public class Order {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String balloonColor;
 
@@ -22,11 +22,12 @@ public class Order {
 
 
     public Order() {
-        this.Id = (long) (Math.random() * 1000);
+
+        //this.id = (long) (Math.random() * 1000);
     }
 
     public Order(String balloonColor, String balloonSize) {
-        this.Id = (long) (Math.random() * 1000);
+        //this.id = (long) (Math.random() * 1000);
         this.balloonColor = balloonColor;
         this.balloonSize = balloonSize;
         //this.clientName = clientName;

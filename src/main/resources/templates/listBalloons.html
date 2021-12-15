@@ -14,15 +14,15 @@
     <h1>Welcome to our Balloon Shop App</h1>
 </header>
     <h2>Choose balloon color:</h2>
-    <form th:action="@{'/selectBalloon'}" th:method="POST">
-        <th:block th:each="balloon : ${balloons}">
-            <input type="radio" name="balloon" th:value="${balloon?.name}"
-                   th:text="${balloon.name} +'  -  '+ ${balloon.description} +'  -  '+ ${balloon.manufacturer}"><br/>
+   <form th:action="@{'/selectBalloon'}" th:method="POST">
+    <th:block th:each="balloon : ${balloons1}">
+        <input type="radio" name="balloon" th:value="${balloon?.name}"
+               th:text="${balloon.name} +'  -  '+ ${balloon.description} +'  -  '+ ${balloon.manufacturer}"><br/>
 
-        </th:block>
-        <br/>
-        <input type='submit' value='Submit'/>
-    </form>
+    </th:block>
+    <br/>
+    <input type='submit' value='Submit'/>
+   </form>
 
     <div class="container mb-4">
         <div class="row">

@@ -9,5 +9,6 @@ public interface OrderService {
 
     //Order placeOrder(String balloonColor, String clientName, String address);
     Optional<Order> findOrderById(Long orderId);
-     List<Order> findAll();
+    List<Order> findAll();
+    Optional<Order> save(String balloonColor, String balloonSize);
 }

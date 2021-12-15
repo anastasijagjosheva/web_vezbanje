@@ -21,7 +21,7 @@ public class DataHolder {
     @PostConstruct
     void init(){
 
-        Manufacturer manufacturer1 = new Manufacturer("nike", "Makedonija", "Skopje-Centar");
+        /*Manufacturer manufacturer1 = new Manufacturer("nike", "Makedonija", "Skopje-Centar");
         Manufacturer manufacturer2 = new Manufacturer("adidas", "Makedonija", "Skopje-Karposh");
         Manufacturer manufacturer3 = new Manufacturer("puma", "Makedonija", "Skopje-Aerodrom");
         Manufacturer manufacturer4 = new Manufacturer("New balance", "Makedonija", "Skopje-Vodno");
@@ -47,9 +47,9 @@ public class DataHolder {
         manufacturers.add(manufacturer2);
         manufacturers.add(manufacturer3);
         manufacturers.add(manufacturer4);
-        manufacturers.add(manufacturer5);
+        manufacturers.add(manufacturer5);*/
 
-        users.add(new User("anastasija.gjosheva", "Anastasija", "Gjosheva", "agj", LocalDate.of(2000,8,23)));
+        //users.add(new User("anastasija.gjosheva", "Anastasija", "Gjosheva", "agj", LocalDate.of(2000,8,23)));
 
     }
 }

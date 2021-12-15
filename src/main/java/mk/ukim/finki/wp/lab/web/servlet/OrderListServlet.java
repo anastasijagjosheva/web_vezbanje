@@ -30,7 +30,7 @@ public class OrderListServlet extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         context.setVariable("ordersList", orderService.findAll());
-        context.setVariable("user",context.getSession().getAttribute("user"));
+        //context.setVariable("user",context.getSession().getAttribute("user"));
 
         springTemplateEngine.process("ordersList.html", context, resp.getWriter());
 

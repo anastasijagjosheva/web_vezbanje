@@ -20,7 +20,7 @@ public class Balloon {
     private Manufacturer manufacturer;
 
     public Balloon() {
-
+        //this.id = (long) (Math.random() * 1000);
     }
 
     public Balloon(String name, String description, Manufacturer manufacturer) {

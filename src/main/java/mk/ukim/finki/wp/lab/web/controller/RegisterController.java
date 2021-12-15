@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/register")
@@ -34,7 +35,7 @@ public class RegisterController {
                             @RequestParam String repeatPassword,
                             @RequestParam String name,
                             @RequestParam String surname,
-                            @RequestParam LocalDate dateOfBirth){
+                            @RequestParam String dateOfBirth){
 
         try {
             this.authService.register(username, password, repeatPassword, name, surname, dateOfBirth);

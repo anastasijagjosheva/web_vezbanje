@@ -36,7 +36,7 @@ public class InMemoryManufacturerRepository {
     }
 
 
-    public void deleteId(Long id) {
+    public void deleteById(Long id) {
         DataHolder.manufacturers.removeIf(i -> i.getId().equals(id));
 
     }

@@ -2,7 +2,9 @@ package mk.ukim.finki.wp.lab.web.servlet;
 
 import mk.ukim.finki.wp.lab.bootstrap.DataHolder;
 import mk.ukim.finki.wp.lab.model.Order;
+import mk.ukim.finki.wp.lab.service.OrderService;
 import mk.ukim.finki.wp.lab.service.impl.BalloonServiceImpl;
+import mk.ukim.finki.wp.lab.service.impl.OrderServiceImpl;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -18,10 +20,12 @@ public class ConfirmationInfoServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
     private final BalloonServiceImpl balloonService;
+    private final OrderService orderService;
 
-    public ConfirmationInfoServlet(SpringTemplateEngine springTemplateEngine, BalloonServiceImpl balloonService) {
+    public ConfirmationInfoServlet(SpringTemplateEngine springTemplateEngine, BalloonServiceImpl balloonService, OrderService orderService) {
         this.springTemplateEngine = springTemplateEngine;
         this.balloonService = balloonService;
+        this.orderService = orderService;
     }
 
     @Override
@@ -39,14 +43,17 @@ public class ConfirmationInfoServlet extends HttpServlet {
         String balloonSize = (String) req.getSession().getAttribute("balloonSize");
         String clientName = req.getParameter("clientName");
         String clientAddress = req.getParameter("clientAddress");
-        String orderId =  req.getRemoteAddr(); //ova e ip addresa
+        String orderIPAddress =  req.getRemoteAddr(); //ova e ip addresa
 
 
-        //Order order = new Order(balloonColor, balloonSize,clientName, clientAddress, orderId);
+        //Order order = new Order(balloonColor, balloonSize,clientName, clientAddress, orderIPAddress);
         Order order = new Order(balloonColor, balloonSize);
 
         req.getSession().setAttribute("order", order);
-        DataHolder.orders.add(order);
+        //context.setVariable("order", order);
+        //DataHolder.orders.add(order);
+        this.orderService.save(balloonColor,balloonSize);
+
 
         springTemplateEngine.process("confirmationInfo.html", context, resp.getWriter());
     }

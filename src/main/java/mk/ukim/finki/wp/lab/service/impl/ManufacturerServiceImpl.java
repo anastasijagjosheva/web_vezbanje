@@ -3,6 +3,7 @@ package mk.ukim.finki.wp.lab.service.impl;
 import mk.ukim.finki.wp.lab.model.Manufacturer;
 import mk.ukim.finki.wp.lab.repository.impl.InMemoryManufacturerRepository;
 //import mk.ukim.finki.wp.lab.repository.jpa.ManufacturerRepository;
+import mk.ukim.finki.wp.lab.repository.jpa.ManufacturerRepositoryJpa;
 import mk.ukim.finki.wp.lab.service.ManufacturerService;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,9 @@ import java.util.Optional;
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
 
-    private final InMemoryManufacturerRepository manufacturerRepository;
+    private final ManufacturerRepositoryJpa manufacturerRepository;
 
-    public ManufacturerServiceImpl(InMemoryManufacturerRepository manufacturerRepository) {
+    public ManufacturerServiceImpl(ManufacturerRepositoryJpa manufacturerRepository) {
         this.manufacturerRepository = manufacturerRepository;
     }
 
@@ -31,11 +32,12 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Override
     public Optional<Manufacturer> save(Long id, String name, String country, String address) {
 
-        return this.manufacturerRepository.save(id, name, country, address);
+        return Optional.of(this.manufacturerRepository.save(new Manufacturer(name, country, address)));
     }
 
     @Override
-    public void deleteId(Long id) {
-        this.manufacturerRepository.deleteId(id);
+    public void deleteById(Long id) {
+
+        this.manufacturerRepository.deleteById(id);
     }
 }

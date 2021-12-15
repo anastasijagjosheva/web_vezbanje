@@ -23,6 +23,7 @@ public class Manufacturer {
 
     public Manufacturer() {
 
+        //this.id = (long) (Math.random() * 1000);
     }
 
     public Manufacturer(String name, String country, String address) {

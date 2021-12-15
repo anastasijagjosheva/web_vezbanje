@@ -5,8 +5,8 @@
     <title>Title</title>
 </head>
 <body>
+<div class="row">
 <div class="container mb-4">
-    <div class="row">
         <div class="col-12" th:if="${ordersList.size() > 0}">
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -21,13 +21,12 @@
                     <tr th:each="order : ${ordersList}">
                         <td th:text="${order.getBalloonColor()}"></td>
                         <td th:text="${order.getBalloonSize()}"></td>
-                        <td th:text="${order.getId()}"></td>
                         <td>
-                        <form th:action="@{'/shopping-cart/add-product/{id}' (id=${order.getId()})}" th:method="POST">
-                            <button type="submit" class="btn btn-sm btn-primary">
-                                <i class="fa fa-trash">Add product to cart</i>
-                            </button>
-                        </form>
+                            <form th:action="@{'/shopping-cart/add-product/{id}' (id=${order.getId()})}" th:method="POST">
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                    <i class="fa fa-trash">Add product to cart</i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     </tbody>

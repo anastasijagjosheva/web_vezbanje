@@ -7,17 +7,19 @@ import mk.ukim.finki.wp.lab.model.exceptions.InvalidUserCredentialsException;
 import mk.ukim.finki.wp.lab.model.exceptions.PasswordsDoNotMatchException;
 import mk.ukim.finki.wp.lab.model.exceptions.UsernameAlreadyExistsException;
 import mk.ukim.finki.wp.lab.repository.impl.InMemoryUserRepository;
+import mk.ukim.finki.wp.lab.repository.jpa.UserRepositoryJpa;
 import mk.ukim.finki.wp.lab.service.AuthService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    private final InMemoryUserRepository userRepository;
+    private final UserRepositoryJpa userRepository;
 
-    public AuthServiceImpl(InMemoryUserRepository  userRepository) {
+    public AuthServiceImpl(UserRepositoryJpa  userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -31,8 +33,10 @@ public class AuthServiceImpl implements AuthService {
                 .orElseThrow(InvalidUserCredentialsException::new);
     }
 
+
+
     @Override
-    public User register(String username, String password, String repeatPassword, String name, String surname, LocalDate dateOfBirth) {
+    public User register(String username, String password, String repeatPassword, String name, String surname, String dateOfBirth) {
 
         if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
             throw new IllegalArgumentsException();
@@ -45,7 +49,7 @@ public class AuthServiceImpl implements AuthService {
             throw new UsernameAlreadyExistsException(username);
 
         User user = new User(username, name, surname, password, dateOfBirth);
-        userRepository.saveOrUpdate(user);
+        userRepository.save(user);
         return user;
     }
 }

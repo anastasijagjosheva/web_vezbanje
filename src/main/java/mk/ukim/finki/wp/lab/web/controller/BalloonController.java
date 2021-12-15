@@ -30,9 +30,9 @@ public class BalloonController {
             model.addAttribute("error", error);
         }*/
 
-        List<Balloon> balloons = this.balloonService.listAll();
+        //List<Balloon> balloons = this.balloonService.listAll();
         List<Balloon> balloons1 = this.balloonService.findAll();
-        model.addAttribute("balloons", balloons);
+        //model.addAttribute("balloons", balloons);
         model.addAttribute("balloons1", balloons1);
 
         return "listBalloons";

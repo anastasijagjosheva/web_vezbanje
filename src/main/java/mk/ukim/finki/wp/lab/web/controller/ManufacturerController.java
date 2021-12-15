@@ -36,7 +36,7 @@ public class ManufacturerController {
 
     @PostMapping("/delete/{id}")
     public String deleteManufacturer(@PathVariable Long id) {
-        this.manufacturerService.deleteId(id);
+        this.manufacturerService.deleteById(id);
         return "redirect:/manufacturers";
     }
 
